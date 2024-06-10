@@ -1,0 +1,7 @@
+{
+  "env": {
+    "DB_USER_NAME": "skz",
+    "DB_USER_PASSWORD": "admin",
+    "MAP_API_KEY": "pk.eyJ1Ijoic2t6eCIsImEiOiJjbHg2ZTVxb2MwcjZ5MmpzYTFkZHR4cXJ6In0.REegpreuWM6kERLY4HH3Iw"
+  }
+}
