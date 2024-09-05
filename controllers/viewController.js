@@ -2,20 +2,23 @@ const View = require("../models/View");
 
 const incView = async (req, res) => {
   try {
-    // Capture additional details
-    const view = new View({
-      timestamp: new Date(), // Capture the current timestamp
-      viewCount: 1, // Optional: store view count, though this may be less relevant if inserting new records
+    // Get the current timestamp in IST
+    const now = new Date();
+    const istOffset = 5 * 60 * 60 * 1000 + 30 * 60 * 1000; // IST is UTC + 5:30
+    const istTime = new Date(now.getTime() + istOffset);
 
-      // You can add other fields here as needed
+    // Create a new document with the view count and timestamp
+    const newView = new View({
+      viewCount: 1, // or whatever initial value you want
+      timestamp: istTime,
     });
 
-    // Save the new document to the collection
-    await view.save();
-
-    res.status(200).send("New view record inserted");
+    // Save the new document
+    await newView.save();
+    res.status(200).send("View count incremented and timestamp saved in IST");
   } catch (err) {
-    res.status(500).send("Error inserting view record");
+    console.error("Error saving view:", err);
+    res.status(500).send("Error saving view count");
   }
 };
 
